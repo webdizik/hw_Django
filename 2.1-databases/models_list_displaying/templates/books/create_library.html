@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шаблон База</title>
+</head>
+<body>
+    {% extends "base.html" %}
+
+    {% load static %}
+
+    {% block content %}
+    <div class="container">
+        <div class="header">
+            <ul>
+                {% for book in availability %}
+                    <li>{{ book }}</li>
+                {% endfor %}
+            </ul>
+            <h5>
+                <a href="{% url 'books' %}">Перейти в каталог</a>
+            </h5>
+        </div>
+    </div>
+    {% endblock %}    
+</body>
+</html>
