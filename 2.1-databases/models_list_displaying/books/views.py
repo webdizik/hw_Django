@@ -1,5 +1,7 @@
 import json
 from django.shortcuts import render
+from django.core.paginator import Paginator
+
 from books.models import Books
 
 
@@ -30,11 +32,29 @@ def books_view(request):
     context = {'books': books}
     return render(request, template, context)
 
-def show_book(request, slug):
+def show_book_name(request, slug):
+    template = 'books/show_book_name.html'
+    
+    books = Books.objects.order_by('pub_date')
     book = Books.objects.get(slug=slug)
-    template = 'books/show_book.html'
-    context = {'book': book}
+
+    current_page = request.GET.get('page', 1)
+    paginator = Paginator(books, 1)
+    page = paginator.get_page(current_page)
+    print(page)
+    context = {'book': book, 'page': page}
+
     return render(request, template, context)
 
-
-
+def show_book_pub_date(request, pub_date):
+    books = Books.objects.order_by('pub_date')
+    book = Books.objects.get(pub_date=pub_date)
+    
+    current_page = book.id
+    paginator = Paginator(books, 1)
+    page = paginator.get_page(current_page)
+    
+    template = 'books/show_book_pub_date.html'
+    context = {'book': book, 'page': page}
+    
+    return render(request, template, context)

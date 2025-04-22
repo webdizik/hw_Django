@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% extends "base.html" %}
+
+    {% load static %}
+    
+    {% block title %}{{ book.name }}{% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h4>
+            <a href="{% url 'books' %}">Вернуться в каталог</a>
+        </h4>
+
+        <div class="book col-md-4">
+            <h3>{{ book.name }}</h3>
+            <p>Автор: {{ book.author }}</p>
+            <img height="400" src="{{ book.image }}" alt="{{ book.name }}"/>
+            <p>Дата публикации:<br>{{ book.pub_date }}</p>
+        </div>
+
+        <div class="pub_date">
+            {% if page.has_previous %}
+                <a href="{% url 'show_book_pub_date' book.pub_date %}">{{ book.pub_dates }}</a>
+            {% endif %}
+            <span>  <--->  </span>
+            {% if page.has_next %}
+                <a href="{{ pub_dates.page.next_page_number }}">{{ page.next_page_number }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}    
+</body>
+</html>
+

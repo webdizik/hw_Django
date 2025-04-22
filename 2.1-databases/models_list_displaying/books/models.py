@@ -9,7 +9,7 @@ class Books(models.Model):
     author = models.CharField(u'Автор', max_length=64)
     image = models.URLField(u'Обложка', blank=True, null=True)
     pub_date = models.DateField(u'Дата публикации')
-    slug = models.SlugField(u'slug', allow_unicode=True, null=True, unique=False)
+    slug = models.SlugField(u'slug')
     
     def save(self, *args, **kwargs):
         if not self.id:
