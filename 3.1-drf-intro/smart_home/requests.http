@@ -15,13 +15,13 @@ Content-Type: application/json
 ###
 
 # создание датчика
-POST {{baseUrl}}/sensor/
+POST {{baseUrl}}/sensors/
 Content-Type: application/json
 
 ###
 
 # обновление датчика
-PATCH {{baseUrl}}/sensor/1/
+PATCH {{baseUrl}}/sensors/1/
 Content-Type: application/json
 
 ###

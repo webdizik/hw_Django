@@ -1,10 +1,15 @@
 from django.urls import path
-from .views import SensorView, SensorCreate, SensorInfo, MeasurementView
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+from .views import CreateGetSensorView, SensorView, UpdateMeasurement
 
 urlpatterns = [
-    path('sensors/', SensorView.as_view()),
-    path('sensors/<pk>/', SensorInfo.as_view()),
-    path('sensor/', SensorCreate.as_view()),
-    path('sensor/<pk>/', SensorInfo.as_view()),
-    path('measurements/', MeasurementView.as_view()),
+    path('sensors/', CreateGetSensorView.as_view()),
+    path('sensors/<pk>/', SensorView.as_view()),
+    path('measurements/', UpdateMeasurement.as_view())
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
